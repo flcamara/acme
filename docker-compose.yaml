@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    restart: always
+    cap_add:
+      - SYS_NICE
+    environment:
+      - MYSQL_ROOT_HOST=%
+      - MYSQL_ROOT_PASSWORD=123
+      - MYSQL_DATABASE=systemdb
+      - TZ=America/Sao_Paulo
+    volumes:
+      - acme-data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-u", "root", "--password=123"]
+      interval: 15s
+      retries: 5
+
+  frontend:
+    build:
+      context: ./acme-project
+    ports:
+      - "80:80"
+    volumes:
+      - ./acme-project:/usr/src/app/src
+
+  backend:
+    build:
+      context: ./server
+    ports:
+      - "5000:5000"
+volumes:
+  acme-data:
