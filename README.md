@@ -8,7 +8,7 @@
 - Abra a pasta init e copie o codigo do arquivo 01.sql
 - Execute esse comando com o banco de dados selecionado
 
-### Agora so basta acessar localhost no navegaor 🥷
+### Agora so basta acessar localhost no navegador 🥷
 
 
 #### Obs. Verifique a disponibilidade de portas do arquivo docker compose e .env para evitar conflitos
